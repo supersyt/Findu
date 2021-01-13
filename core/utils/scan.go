@@ -10,6 +10,7 @@ import (
 
 var lock sync.RWMutex
 
+// todo 优化扫描结果展示，建立结构体
 
 
 // Scan 内置指纹库 扫描函数 return: ["url": ["规则名称"]]
@@ -93,9 +94,7 @@ func checkRules(url string, threads int) ([]string, error) {
 		case <-done:
 			threads--
 			if threads == 0 {
-				lock.RLock()
 				logger.Successf("The [%s] scanned ! Title: [%s] Queue count: %d, Check count: %d, Get count: %d", url, resp.Title, pushCount, getCount, len(foundResult))
-				lock.RUnlock()
 				return foundResult,nil
 			}
 		case <-time.After(3 * time.Second):
