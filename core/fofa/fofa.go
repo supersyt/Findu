@@ -14,18 +14,18 @@
 package fofa
 
 import (
+	"bytes"
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
+	"github.com/buger/jsonparser"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
-	"bytes"
 	"strings"
-	"github.com/buger/jsonparser"
 )
 
 // Fofa a fofa client can be used to make queries

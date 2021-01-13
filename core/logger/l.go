@@ -97,7 +97,6 @@ func (t *Logger) Print(v ...interface{}) {
 	t.log(LevelInfo, false, v...)
 }
 
-
 // Warn with date and file info
 func (t *Logger) Warn(v ...interface{}) {
 	t.mu.Lock()
@@ -224,7 +223,6 @@ func Print(v ...interface{}) {
 	Default.Print(v...)
 }
 
-
 // Warn from default instance
 func Warn(v ...interface{}) {
 	Default.Warn(v...)
@@ -335,17 +333,17 @@ func New() *Logger {
 	}
 }
 
-func Success(str string){
+func Success(str string) {
 	now := time.Now().UTC().Format("2006-01-02 15:04:05")
-	Default.Printf(Colorize(fmt.Sprintf("%s -> %%s", now), Gray), Colorize("[+] " + str, Green))
+	Default.Printf(Colorize(fmt.Sprintf("%s -> %%s", now), Gray), Colorize("[+] "+str, Green))
 }
 
-func Successf(format string, v ...interface{}){
+func Successf(format string, v ...interface{}) {
 	now := time.Now().UTC().Format("2006-01-02 15:04:05")
-	Default.Printf(Colorize(fmt.Sprintf("%s -> %%s", now), Gray), Colorize("[+] " + fmt.Sprintf(format, v...), Green))
+	Default.Printf(Colorize(fmt.Sprintf("%s -> %%s", now), Gray), Colorize("[+] "+fmt.Sprintf(format, v...), Green))
 }
 
-func (t *Logger) Success(v ...interface{}){
+func (t *Logger) Success(v ...interface{}) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	if t.Level < LevelDebug {
@@ -354,10 +352,10 @@ func (t *Logger) Success(v ...interface{}){
 	t.log(LevelInfo, false, v)
 }
 
-func Info(str string){
+func Info(str string) {
 	Default.Print(Colorize(str, White))
 }
 
-func Infof(format string,v ...interface{}){
+func Infof(format string, v ...interface{}) {
 	Default.Print(Colorize(fmt.Sprintf(format, v...), White))
 }

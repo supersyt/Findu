@@ -12,7 +12,6 @@ var lock sync.RWMutex
 
 // todo 优化扫描结果展示，建立结构体
 
-
 // Scan 内置指纹库 扫描函数 return: ["url": ["规则名称"]]
 func Scan(urls []string, threads int) map[string][]string {
 	result := make(map[string][]string)
@@ -58,8 +57,8 @@ func checkRules(url string, threads int) ([]string, error) {
 	var pushCount = 0
 	// getCount 检查次数
 	var getCount = 0
-	resp,err := http.Get(url)
-	if err != nil{
+	resp, err := http.Get(url)
+	if err != nil {
 		logger.Errorf("Have a error: %s", err.Error())
 		return nil, err
 	}
@@ -74,7 +73,7 @@ func checkRules(url string, threads int) ([]string, error) {
 				lock.Lock()
 				getCount++
 				lock.Unlock()
-				found,name := x.Check(url, resp)
+				found, name := x.Check(url, resp)
 				if found {
 					result <- name
 				}
@@ -95,7 +94,7 @@ func checkRules(url string, threads int) ([]string, error) {
 			threads--
 			if threads == 0 {
 				logger.Successf("The [%s] scanned ! Title: [%s] Queue count: %d, Check count: %d, Get count: %d", url, resp.Title, pushCount, getCount, len(foundResult))
-				return foundResult,nil
+				return foundResult, nil
 			}
 		case <-time.After(3 * time.Second):
 			return foundResult, nil

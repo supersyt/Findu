@@ -2,7 +2,7 @@ package banner
 
 import "fmt"
 
-func init()  {
+func init() {
 	banner := `
  ____  __  __ _  ____  _  _ 
 (  __)(  )(  ( \(    \/ )( \

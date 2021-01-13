@@ -10,14 +10,13 @@ import (
 )
 
 var (
-	Urls string
+	Urls     string
 	Filename string
-	Thread int
-	List bool
-	Help bool
-	once sync.Once
+	Thread   int
+	List     bool
+	Help     bool
+	once     sync.Once
 )
-
 
 func InitFlags() {
 	flag.StringVar(&Urls, "url", "", "Please input your urls： [http|https]://www.example.com[,http://www.baidu.com]")
@@ -31,7 +30,7 @@ func InitFlags() {
 		os.Exit(0)
 	}
 
-	if Urls == "" && Filename == "" && List == false{
+	if Urls == "" && Filename == "" && List == false {
 		flag.Usage()
 		os.Exit(0)
 	}
@@ -41,7 +40,7 @@ func InitFlags() {
 
 func init() {
 	InitFlags()
-	once.Do(func(){
+	once.Do(func() {
 		ruler.LoadDefault()
 	})
 }

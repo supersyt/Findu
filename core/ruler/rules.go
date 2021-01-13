@@ -15,98 +15,100 @@ type Rule struct {
 	Name      string
 	regex     *regexp.Regexp
 	checkType string
-	fofa	  string
+	fofa      string
 }
+
 // Default 预设指纹库
 var Default Rules
+
 // LoadDefault 加载预设指纹库
-func LoadDefault(){
+func LoadDefault() {
 	initDefualt := Rules{
 		[]Rule{
-			{"Shiro", regexp.MustCompile(`(?i)(=deleteMe|rememberMe=)`), "headers",""},
-			{"宝塔-BT.cn", regexp.MustCompile(`(?i)(app.bt.cn/static/app.png|安全入口校验失败)`), "body",""},
-			{"Nexus", regexp.MustCompile(`(?i)(<title>Nexus Repository Manager</title>)`), "body",""},
-			{"Harbor", regexp.MustCompile(`(?i)(<title>Harbor</title>)`), "body",""},
-			{"禅道", regexp.MustCompile(`(?i)(/theme/default/images/main/zt-logo.png)`), "body",""},
-			{"xxl-job", regexp.MustCompile(`(?i)(分布式任务调度平台XXL-JOB)`), "body",""},
-			{"weblogic", regexp.MustCompile(`(?i)(/console/framework/skins/wlsconsole/images/login_WebLogic_branding.png|Welcome to Weblogic Application Server|<i>Hypertext Transfer Protocol -- HTTP/1.1</i>)`), "body",""},
-			{"用友致远oa", regexp.MustCompile(`(?i)(/seeyon/USER-DATA/IMAGES/LOGIN/login.gif)`), "body",""},
-			{"Typecho", regexp.MustCompile(`(?i)(Typecho</a>)`), "body",""},
-			{"金蝶EAS", regexp.MustCompile(`(?i)(easSessionId)`), "body",""},
-			{"phpMyAdmin", regexp.MustCompile(`(?i)(/themes/pmahomme/img/logo_right.png)`), "body",""},
-			{"H3C-AM8000", regexp.MustCompile(`(?i)(AM8000)`), "body",""},
-			{"360企业版", regexp.MustCompile(`(?i)(360EntWebAdminMD5Secret)`), "body",""},
-			{"H3C公司产品", regexp.MustCompile(`(?i)(service@h3c.com)`), "body",""},
-			{"H3C ICG 1000", regexp.MustCompile(`(?i)(ICG 1000系统管理)`), "body",""},
-			{"Citrix-Metaframe", regexp.MustCompile(`(?i)(window.location=\\"/Citrix/MetaFrame)`), "body",""},
-			{"H3C ER5100", regexp.MustCompile(`(?i)(ER5100系统管理)`), "body",""},
-			{"阿里云CDN", regexp.MustCompile(`(?i)(cdn.aliyuncs.com)`), "body",""},
-			{"CISCO_EPC3925", regexp.MustCompile(`(?i)(Docsis_system)`), "body",""},
-			{"CISCO ASR", regexp.MustCompile(`(?i)(CISCO ASR)`), "body",""},
-			{"H3C ER3200", regexp.MustCompile(`(?i)(ER3200系统管理)`), "body",""},
-			{"万户ezOFFICE", regexp.MustCompile(`(?i)(LocLan)`), "headers",""},
-			{"万户网络", regexp.MustCompile(`(?i)(css/css_whir.css)`), "body",""},
-			{"Spark_Master", regexp.MustCompile(`(?i)(Spark Master at)`), "body",""},
-			{"华为_HUAWEI_SRG2220, ", regexp.MustCompile(`(?i)(HUAWEI SRG2220)`), "body",""},
-			{"蓝凌EIS智慧协同平台", regexp.MustCompile(`(?i)(/scripts/jquery.landray.common.js)`), "body",""},
-			{"深信服ssl-vpn", regexp.MustCompile(`(?i)(login_psw.csp)`), "body",""},
-			{"华为 NetOpen", regexp.MustCompile(`(?i)(/netopen/theme/css/inFrame.css)`), "body",""},
-			{"Citrix-Web-PN-Server", regexp.MustCompile(`(?i)(Citrix Web PN Server)`), "body",""},
-			{"juniper_vpn", regexp.MustCompile(`(?i)(welcome.cgi\\?p=logo|/images/logo_juniper_reversed.gif)`), "body",""},
-			{"360主机卫士", regexp.MustCompile(`(?i)(zhuji.360.cn)`), "headers",""},
-			{"Nagios", regexp.MustCompile(`(?i)(Nagios Access)`), "headers",""},
-			{"H3C ER8300", regexp.MustCompile(`(?i)(ER8300系统管理)`), "body",""},
-			{"Citrix-Access-Gateway", regexp.MustCompile(`(?i)(Citrix Access Gateway)`), "body",""},
-			{"华为 MCU", regexp.MustCompile(`(?i)(McuR5-min.js)`), "body",""},
-			{"TP-LINK Wireless WDR3600", regexp.MustCompile(`(?i)(TP-LINK Wireless WDR3600)`), "body",""},
-			{"泛微协同办公OA", regexp.MustCompile(`(?i)(ecology_JSessionid)`), "headers",""},
-			{"华为_HUAWEI_ASG2050", regexp.MustCompile(`(?i)(HUAWEI ASG2050)`), "body",""},
-			{"360网站卫士", regexp.MustCompile(`(?i)(360wzb)`), "body",""},
-			{"Citrix-XenServer", regexp.MustCompile(`(?i)(Citrix Systems, Inc.XenServer)`), "body",""},
-			{"H3C ER2100V2", regexp.MustCompile(`(?i)(ER2100V2系统管理)`), "body",""},
-			{"zabbix", regexp.MustCompile(`(?i)(images/general/zabbix.ico)`), "body",""},
-			{"CISCO_VPN", regexp.MustCompile(`(?i)(webvpn)`), "headers",""},
-			{"360站长平台", regexp.MustCompile(`(?i)(360-site-verification)`), "body",""},
-			{"H3C ER3108GW", regexp.MustCompile(`(?i)(ER3108GW系统管理)`), "body",""},
-			{"o2security_vpn", regexp.MustCompile(`(?i)(client_param = install_active)`), "headers",""},
-			{"H3C ER3260G2", regexp.MustCompile(`(?i)(ER3260G2系统管理)`), "body",""},
-			{"H3C ICG1000", regexp.MustCompile(`(?i)(ICG1000系统管理)`), "body",""},
-			{"CISCO-CX20", regexp.MustCompile(`(?i)(CISCO-CX20)`), "body",""},
-			{"H3C ER5200", regexp.MustCompile(`(?i)(ER5200系统管理)`), "body",""},
-			{"linksys-vpn-bragap14-parintins", regexp.MustCompile(`(?i)(linksys-vpn-bragap14-parintins)`), "body",""},
-			{"360网站卫士常用前端公共库", regexp.MustCompile(`(?i)(libs.useso.com)`), "body",""},
-			{"H3C ER3100", regexp.MustCompile(`(?i)(ER3100系统管理)`), "body",""},
-			{"H3C-SecBlade-FireWall", regexp.MustCompile(`(?i)(js/MulPlatAPI.js)`), "body",""},
-			{"360webfacil_360WebManager", regexp.MustCompile(`(?i)(publico/template/)`), "body",""},
-			{"Citrix_Netscaler", regexp.MustCompile(`(?i)(ns_af)`), "body",""},
-			{"H3C ER6300G2", regexp.MustCompile(`(?i)(ER6300G2系统管理)`), "body",""},
-			{"H3C ER3260", regexp.MustCompile(`(?i)(ER3260系统管理)`), "body",""},
-			{"华为_HUAWEI_SRG3250", regexp.MustCompile(`(?i)(HUAWEI SRG3250)`), "body",""},
-			{"exchange", regexp.MustCompile(`(?i)(/owa/auth.owa)`), "body",""},
-			{"Spark_Worker", regexp.MustCompile(`(?i)(Spark Worker at)`), "body",""},
-			{"H3C ER3108G", regexp.MustCompile(`(?i)(ER3108G系统管理)`), "body",""},
-			{"深信服防火墙类产品",regexp.MustCompile(`(?i)(SANGFOR FW)`), "body",""},
-			{"Citrix-ConfProxy", regexp.MustCompile(`(?i)(confproxy)`), "body",""},
-			{"360网站安全检测", regexp.MustCompile(`(?i)(webscan.360.cn/status/pai/hash)`),"body",""},
-			{"H3C ER5200G2", regexp.MustCompile(`(?i)(ER5200G2系统管理)`), "body",""},
-			{"华为（HUAWEI）安全设备", regexp.MustCompile(`(?i)(sweb-lib/resource/)`), "body",""},
-			{"H3C ER6300", regexp.MustCompile(`(?i)(ER6300系统管理)`), "body",""},
-			{"华为_HUAWEI_ASG2100", regexp.MustCompile(`(?i)(HUAWEI ASG2100)`), "body",""},
-			{"TP-Link 3600 DD-WRT", regexp.MustCompile(`(?i)(TP-Link 3600 DD-WRT)`), "body",""},
-			{"NETGEAR WNDR3600", regexp.MustCompile(`(?i)(NETGEAR WNDR3600)`), "body",""},
-			{"H3C ER2100", regexp.MustCompile(`(?i)(ER2100系统管理)`), "body",""},
-			{"绿盟下一代防火墙", regexp.MustCompile(`(?i)(NSFOCUS NF)`), "body",""},
-			{"jira", regexp.MustCompile(`(?i)(jira.webresources)`), "body",""},
-			{"金和协同管理平台", regexp.MustCompile(`(?i)(金和协同管理平台)`), "body",""},
-			{"Citrix-NetScaler", regexp.MustCompile(`(?i)(NS-CACHE)`), "body",""},
-			{"linksys-vpn", regexp.MustCompile(`(?i)(linksys-vpn)`), "headers",""},
-			{"通达OA", regexp.MustCompile(`(?i)(/static/images/tongda.ico)`), "body",""},
-			{"华为（HUAWEI）Secoway设备", regexp.MustCompile(`(?i)(Secoway)`), "body",""},
-			{"华为_HUAWEI_SRG1220", regexp.MustCompile(`(?i)(HUAWEI SRG1220)`), "body",""},
-			{"H3C ER2100n", regexp.MustCompile(`(?i)(ER2100n系统管理)`), "body",""},
-			{"H3C ER8300G2", regexp.MustCompile(`(?i)(ER8300G2系统管理)`), "body",""},
-			{"金蝶政务GSiS", regexp.MustCompile(`(?i)(/kdgs/script/kdgs.js)`), "body",""},
-			{"Jboss", regexp.MustCompile(`(?i)(Welcome to JBoss|jboss.css)`), "body",""},
+			{"Shiro", regexp.MustCompile(`(?i)(=deleteMe|rememberMe=)`), "headers", ""},
+			{"宝塔-BT.cn", regexp.MustCompile(`(?i)(app.bt.cn/static/app.png|安全入口校验失败)`), "body", ""},
+			{"Nexus", regexp.MustCompile(`(?i)(<title>Nexus Repository Manager</title>)`), "body", ""},
+			{"Harbor", regexp.MustCompile(`(?i)(<title>Harbor</title>)`), "body", ""},
+			{"禅道", regexp.MustCompile(`(?i)(/theme/default/images/main/zt-logo.png)`), "body", ""},
+			{"xxl-job", regexp.MustCompile(`(?i)(分布式任务调度平台XXL-JOB)`), "body", ""},
+			{"weblogic", regexp.MustCompile(`(?i)(/console/framework/skins/wlsconsole/images/login_WebLogic_branding.png|Welcome to Weblogic Application Server|<i>Hypertext Transfer Protocol -- HTTP/1.1</i>)`), "body", ""},
+			{"用友致远oa", regexp.MustCompile(`(?i)(/seeyon/USER-DATA/IMAGES/LOGIN/login.gif)`), "body", ""},
+			{"Typecho", regexp.MustCompile(`(?i)(Typecho</a>)`), "body", ""},
+			{"金蝶EAS", regexp.MustCompile(`(?i)(easSessionId)`), "body", ""},
+			{"phpMyAdmin", regexp.MustCompile(`(?i)(/themes/pmahomme/img/logo_right.png)`), "body", ""},
+			{"H3C-AM8000", regexp.MustCompile(`(?i)(AM8000)`), "body", ""},
+			{"360企业版", regexp.MustCompile(`(?i)(360EntWebAdminMD5Secret)`), "body", ""},
+			{"H3C公司产品", regexp.MustCompile(`(?i)(service@h3c.com)`), "body", ""},
+			{"H3C ICG 1000", regexp.MustCompile(`(?i)(ICG 1000系统管理)`), "body", ""},
+			{"Citrix-Metaframe", regexp.MustCompile(`(?i)(window.location=\\"/Citrix/MetaFrame)`), "body", ""},
+			{"H3C ER5100", regexp.MustCompile(`(?i)(ER5100系统管理)`), "body", ""},
+			{"阿里云CDN", regexp.MustCompile(`(?i)(cdn.aliyuncs.com)`), "body", ""},
+			{"CISCO_EPC3925", regexp.MustCompile(`(?i)(Docsis_system)`), "body", ""},
+			{"CISCO ASR", regexp.MustCompile(`(?i)(CISCO ASR)`), "body", ""},
+			{"H3C ER3200", regexp.MustCompile(`(?i)(ER3200系统管理)`), "body", ""},
+			{"万户ezOFFICE", regexp.MustCompile(`(?i)(LocLan)`), "headers", ""},
+			{"万户网络", regexp.MustCompile(`(?i)(css/css_whir.css)`), "body", ""},
+			{"Spark_Master", regexp.MustCompile(`(?i)(Spark Master at)`), "body", ""},
+			{"华为_HUAWEI_SRG2220, ", regexp.MustCompile(`(?i)(HUAWEI SRG2220)`), "body", ""},
+			{"蓝凌EIS智慧协同平台", regexp.MustCompile(`(?i)(/scripts/jquery.landray.common.js)`), "body", ""},
+			{"深信服ssl-vpn", regexp.MustCompile(`(?i)(login_psw.csp)`), "body", ""},
+			{"华为 NetOpen", regexp.MustCompile(`(?i)(/netopen/theme/css/inFrame.css)`), "body", ""},
+			{"Citrix-Web-PN-Server", regexp.MustCompile(`(?i)(Citrix Web PN Server)`), "body", ""},
+			{"juniper_vpn", regexp.MustCompile(`(?i)(welcome.cgi\\?p=logo|/images/logo_juniper_reversed.gif)`), "body", ""},
+			{"360主机卫士", regexp.MustCompile(`(?i)(zhuji.360.cn)`), "headers", ""},
+			{"Nagios", regexp.MustCompile(`(?i)(Nagios Access)`), "headers", ""},
+			{"H3C ER8300", regexp.MustCompile(`(?i)(ER8300系统管理)`), "body", ""},
+			{"Citrix-Access-Gateway", regexp.MustCompile(`(?i)(Citrix Access Gateway)`), "body", ""},
+			{"华为 MCU", regexp.MustCompile(`(?i)(McuR5-min.js)`), "body", ""},
+			{"TP-LINK Wireless WDR3600", regexp.MustCompile(`(?i)(TP-LINK Wireless WDR3600)`), "body", ""},
+			{"泛微协同办公OA", regexp.MustCompile(`(?i)(ecology_JSessionid)`), "headers", ""},
+			{"华为_HUAWEI_ASG2050", regexp.MustCompile(`(?i)(HUAWEI ASG2050)`), "body", ""},
+			{"360网站卫士", regexp.MustCompile(`(?i)(360wzb)`), "body", ""},
+			{"Citrix-XenServer", regexp.MustCompile(`(?i)(Citrix Systems, Inc.XenServer)`), "body", ""},
+			{"H3C ER2100V2", regexp.MustCompile(`(?i)(ER2100V2系统管理)`), "body", ""},
+			{"zabbix", regexp.MustCompile(`(?i)(images/general/zabbix.ico)`), "body", ""},
+			{"CISCO_VPN", regexp.MustCompile(`(?i)(webvpn)`), "headers", ""},
+			{"360站长平台", regexp.MustCompile(`(?i)(360-site-verification)`), "body", ""},
+			{"H3C ER3108GW", regexp.MustCompile(`(?i)(ER3108GW系统管理)`), "body", ""},
+			{"o2security_vpn", regexp.MustCompile(`(?i)(client_param = install_active)`), "headers", ""},
+			{"H3C ER3260G2", regexp.MustCompile(`(?i)(ER3260G2系统管理)`), "body", ""},
+			{"H3C ICG1000", regexp.MustCompile(`(?i)(ICG1000系统管理)`), "body", ""},
+			{"CISCO-CX20", regexp.MustCompile(`(?i)(CISCO-CX20)`), "body", ""},
+			{"H3C ER5200", regexp.MustCompile(`(?i)(ER5200系统管理)`), "body", ""},
+			{"linksys-vpn-bragap14-parintins", regexp.MustCompile(`(?i)(linksys-vpn-bragap14-parintins)`), "body", ""},
+			{"360网站卫士常用前端公共库", regexp.MustCompile(`(?i)(libs.useso.com)`), "body", ""},
+			{"H3C ER3100", regexp.MustCompile(`(?i)(ER3100系统管理)`), "body", ""},
+			{"H3C-SecBlade-FireWall", regexp.MustCompile(`(?i)(js/MulPlatAPI.js)`), "body", ""},
+			{"360webfacil_360WebManager", regexp.MustCompile(`(?i)(publico/template/)`), "body", ""},
+			{"Citrix_Netscaler", regexp.MustCompile(`(?i)(ns_af)`), "body", ""},
+			{"H3C ER6300G2", regexp.MustCompile(`(?i)(ER6300G2系统管理)`), "body", ""},
+			{"H3C ER3260", regexp.MustCompile(`(?i)(ER3260系统管理)`), "body", ""},
+			{"华为_HUAWEI_SRG3250", regexp.MustCompile(`(?i)(HUAWEI SRG3250)`), "body", ""},
+			{"exchange", regexp.MustCompile(`(?i)(/owa/auth.owa)`), "body", ""},
+			{"Spark_Worker", regexp.MustCompile(`(?i)(Spark Worker at)`), "body", ""},
+			{"H3C ER3108G", regexp.MustCompile(`(?i)(ER3108G系统管理)`), "body", ""},
+			{"深信服防火墙类产品", regexp.MustCompile(`(?i)(SANGFOR FW)`), "body", ""},
+			{"Citrix-ConfProxy", regexp.MustCompile(`(?i)(confproxy)`), "body", ""},
+			{"360网站安全检测", regexp.MustCompile(`(?i)(webscan.360.cn/status/pai/hash)`), "body", ""},
+			{"H3C ER5200G2", regexp.MustCompile(`(?i)(ER5200G2系统管理)`), "body", ""},
+			{"华为（HUAWEI）安全设备", regexp.MustCompile(`(?i)(sweb-lib/resource/)`), "body", ""},
+			{"H3C ER6300", regexp.MustCompile(`(?i)(ER6300系统管理)`), "body", ""},
+			{"华为_HUAWEI_ASG2100", regexp.MustCompile(`(?i)(HUAWEI ASG2100)`), "body", ""},
+			{"TP-Link 3600 DD-WRT", regexp.MustCompile(`(?i)(TP-Link 3600 DD-WRT)`), "body", ""},
+			{"NETGEAR WNDR3600", regexp.MustCompile(`(?i)(NETGEAR WNDR3600)`), "body", ""},
+			{"H3C ER2100", regexp.MustCompile(`(?i)(ER2100系统管理)`), "body", ""},
+			{"绿盟下一代防火墙", regexp.MustCompile(`(?i)(NSFOCUS NF)`), "body", ""},
+			{"jira", regexp.MustCompile(`(?i)(jira.webresources)`), "body", ""},
+			{"金和协同管理平台", regexp.MustCompile(`(?i)(金和协同管理平台)`), "body", ""},
+			{"Citrix-NetScaler", regexp.MustCompile(`(?i)(NS-CACHE)`), "body", ""},
+			{"linksys-vpn", regexp.MustCompile(`(?i)(linksys-vpn)`), "headers", ""},
+			{"通达OA", regexp.MustCompile(`(?i)(/static/images/tongda.ico)`), "body", ""},
+			{"华为（HUAWEI）Secoway设备", regexp.MustCompile(`(?i)(Secoway)`), "body", ""},
+			{"华为_HUAWEI_SRG1220", regexp.MustCompile(`(?i)(HUAWEI SRG1220)`), "body", ""},
+			{"H3C ER2100n", regexp.MustCompile(`(?i)(ER2100n系统管理)`), "body", ""},
+			{"H3C ER8300G2", regexp.MustCompile(`(?i)(ER8300G2系统管理)`), "body", ""},
+			{"金蝶政务GSiS", regexp.MustCompile(`(?i)(/kdgs/script/kdgs.js)`), "body", ""},
+			{"Jboss", regexp.MustCompile(`(?i)(Welcome to JBoss|jboss.css)`), "body", ""},
 			{`Huawei-Firewall`, nil, "fofa", `header="Eudemon Server" || body="Modify by wangxiangguang"`},
 			{`Canon-Printer`, nil, "fofa", `header="Canon Http Server"`},
 			{`CUPS`, nil, "fofa", `header="CUPS"`},
@@ -2227,7 +2229,6 @@ func LoadDefault(){
 	Default.Rules = append(Default.Rules, initDefualt.Rules...)
 }
 
-
 func (r *Rule) Check(url string, resp http.Response) (found bool, name string) {
 	//logger.Debugf("[*] Debug Module: checking rule [%s] on url [%s]", r.Name, url)
 	// 检查类型不是body 就是 headers
@@ -2250,15 +2251,14 @@ var (
 	rBracket = regexp.MustCompile(`(?i)\((.*)\)`)
 )
 
-
 // fofaCheck fofa规则检查
 func (r *Rule) fofaCheck(resp http.Response) (found bool, name string) {
 
-	if strings.Contains(r.fofa, "||") && !strings.Contains(r.fofa, "&&") && !strings.Contains(r.fofa, "("){
+	if strings.Contains(r.fofa, "||") && !strings.Contains(r.fofa, "&&") && !strings.Contains(r.fofa, "(") {
 		// 满足一个条件即可的情况
 		for _, x := range strings.Split(r.fofa, "||") {
 			if checkRule(r.Name, x, resp) {
-				return true , r.Name
+				return true, r.Name
 			}
 		}
 	} else if !strings.Contains(r.fofa, "||") && !strings.Contains(r.fofa, "&&") && !strings.Contains(r.fofa, "(") {
@@ -2288,12 +2288,12 @@ func (r *Rule) fofaCheck(resp http.Response) (found bool, name string) {
 			logger.Errorf("与条件下存在并条件: 1||2||(3&&4) have a error, Current key: %s", r.fofa)
 			return false, ""
 		}
-		if  strings.Contains(rule[1], "&&") {
+		if strings.Contains(rule[1], "&&") {
 			for _, x := range strings.Split(r.fofa, "||") {
 				if strings.Contains(x, "&&") {
 					num := 0
-					_rule := strings.Split(x,"&&")
-					for _, j := range _rule{
+					_rule := strings.Split(x, "&&")
+					for _, j := range _rule {
 						if checkRule(r.Name, j, resp) {
 							num += 1
 						}
@@ -2314,7 +2314,7 @@ func (r *Rule) fofaCheck(resp http.Response) (found bool, name string) {
 			for _, x := range _rule {
 				if strings.Contains(x, "||") {
 					for _, j := range strings.Split(x, "||") {
-						if checkRule(r.Name, j, resp){
+						if checkRule(r.Name, j, resp) {
 							num += 1
 							break
 						}
@@ -2339,7 +2339,7 @@ func checkRule(name string, key string, resp http.Response) bool {
 		strings.Contains(key, "banner=") ||
 		strings.Contains(key, "protocol=") ||
 		strings.Contains(key, "type=") ||
-		strings. Contains(key, "port="){
+		strings.Contains(key, "port=") {
 		return false
 	}
 	if strings.Contains(key, "title=") {
@@ -2374,7 +2374,6 @@ func checkRule(name string, key string, resp http.Response) bool {
 	return false
 }
 
-
 func Count() int {
 	return len(Default.Rules)
 }
@@ -2386,4 +2385,3 @@ func ShowInfo() {
 		logger.Infof("%d: %s", index+1, x.Name)
 	}
 }
-
