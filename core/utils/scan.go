@@ -65,11 +65,7 @@ func checkRules(url string, threads int) ([]string, error) {
 	for worker := 0; worker < threads; worker++ {
 		// 核心函数，用于调度指纹规则检查
 		go func(rule <-chan ruler.Rule) {
-			for {
-				x, ok := <-rule
-				if !ok {
-					break
-				}
+			for x := range rule{
 				lock.Lock()
 				getCount++
 				lock.Unlock()

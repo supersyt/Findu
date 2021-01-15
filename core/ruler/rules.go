@@ -2348,7 +2348,7 @@ func checkRule(name string, key string, resp http.Response) bool {
 			logger.Errorf("rTitle have a error, Current key is : %s", key)
 		}
 		_rule := strings.ToLower(rule[1])
-		if strings.Contains(resp.Header, _rule) {
+		if strings.Contains(resp.Title, _rule) {
 			return true
 		}
 
@@ -2358,7 +2358,7 @@ func checkRule(name string, key string, resp http.Response) bool {
 			logger.Errorf("rBody have a error, Current key is : %s", key)
 		}
 		_rule := strings.ToLower(rule[1])
-		if strings.Contains(resp.Header, _rule) {
+		if strings.Contains(resp.Body, _rule) {
 			return true
 		}
 	} else {
